@@ -1,1 +1,50 @@
-# ADD CSS
+.navbar {
+  font-size: 22px;
+  background-color: #fff;
+}
+
+.navlist {
+  margin: 0;
+}
+
+.navitem {
+  display: inline-block;
+}
+
+.navitem:hover {
+  background-color: rgba(231, 132, 119, 0.18);
+}
+
+.navitem a {
+  display: inline-block;
+  color: #454545;
+  padding: 10px 20px;
+}
+
+.navitem.right {
+  float: right;
+}
+.action-button {
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+  background-color: #000;
+  border: 1px solid #ababab;
+  border-radius: 5px;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #f9d2b2;
+  border-color: #333;
+  color: #333;
+}
+.hidden {
+  display: none;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 20px 10px;
+}
