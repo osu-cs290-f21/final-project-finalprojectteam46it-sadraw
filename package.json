@@ -4,7 +4,12 @@
   "description": "This is a \"social networking\" application where one can share drawings and text via the internet!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "handlebars views/partials/post.handlebars -f public/post.js",
+    "prestart": "npm run build",
+    "predev": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,8 @@
   },
   "homepage": "https://github.com/osu-cs290-f21/final-project-finalprojectteam46it-sadraw#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.2",
+    "handlebars": "^4.7.7"
   }
 }
