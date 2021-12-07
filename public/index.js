@@ -1,5 +1,5 @@
 document.getElementById("post-button").addEventListener("click", toggleModal)
-document.getElementById("modal-close").addEventListener("click", toggleModal)
+document.getElementById("modal-close").addEventListener("click", checkToggleModal)
 document.getElementById("modal-cancel").addEventListener("click", toggleModal)
 document.getElementById("modal-accept").addEventListener("click", modalAccept)
 
@@ -13,6 +13,7 @@ let isPressed = false;
 let color = "black";
 let x = undefined;
 let y = undefined;
+
 canvas.addEventListener("mousedown", (e) => {
     isPressed = true;
 
@@ -28,6 +29,7 @@ canvas.addEventListener("mouseup", (e) => {
 });
 
 canvas.addEventListener("mousemove", (e) => {
+
     if (isPressed) {
         const x2 = e.offsetX;
         const y2 = e.offsetY;
@@ -38,6 +40,13 @@ canvas.addEventListener("mousemove", (e) => {
         y = y2;
     }
 });
+
+// Added: ###
+function erase() {
+    // Can make anonymous function
+    color = "white";
+}
+
 function drawCircle(x, y) {
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -131,10 +140,17 @@ toggleModal()
 
 }
 
+function checkToggleModal() { 
+    if (confirm("Are you sure you want to discard your work? This cannot be undone.")) {
+        toggleModal();
+    }
+}
+
 function toggleModal() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("post-date-input").value = ""
     document.getElementById("post-text-input").value = ""
+
     document.getElementById("modal-backdrop").classList.toggle("hidden")
     document.getElementById("post-something-modal").classList.toggle("hidden")
 }
