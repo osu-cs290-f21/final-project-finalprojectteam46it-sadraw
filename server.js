@@ -31,11 +31,13 @@ app.get('/', function (req, res, next) {
     res.status(200).render('homePage', postData); */
 }); 
 
+/*
 // Open the 404 page with the handlebars template
 app.get('./views/', function (req, res) { // the 404 page is stored in views
   console.log("== Throw the 404 for a bad directory");
   res.status(404).render('404');
 });
+*/
 
 // Open the main page and can basically be exactly the same as lines 38-41
 app.get('./', (req, res) => {
