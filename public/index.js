@@ -5,13 +5,6 @@ document.getElementById("modal-accept").addEventListener("click", modalAccept)
 
 var yourPosts = [];
 
-let button_clicks = [
-    {
-        "clicked_likes": 0,
-        "clicked_dislikes": 0
-    }
-]
-
 const canvas = document.getElementById("canvas");
 const clearEl = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
@@ -130,6 +123,8 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
     for (var i = 0; i < dislikeButtons.length; i++) {
         dislikeButtons[i].addEventListener('click', addDislike)
     } */
+
+    /* FOR NEW POSTS
     for (var i = 0; i < dislikeButtons.length; i++) {
         //console.log("dislikeButtons.length", dislikeButtons.length)
         i_d = i;
@@ -144,15 +139,8 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
         //console.log("dislikeButtons.length", dislikeButtons.length)
         i_d = i;
         likeButtons[i_d].addEventListener('click', addLike)
-    }
+    }  */
 
-    var obj = {
-        "clicked_likes": 0,
-        "clicked_dislikes": 0
-    }
-    button_clicks.push(obj);
-
-    console.log("length of arr", button_clicks.length)
 
     toggleModal()
     /* uses template
@@ -182,14 +170,14 @@ function addDislike(event){
  
 } */
 
+/*
 var likeButtons = document.getElementsByClassName("like-button")
 console.log(likeButtons)
 for (var i = 0; i < likeButtons.length; i++) {
     //console.log("dislikeButtons.length", dislikeButtons.length)
     i_d = i;
     likeButtons[i_d].addEventListener('click', addLike)
-}
-
+}   
 
 
 ////
@@ -249,26 +237,47 @@ function addLike(event) {
         // Decrement dislikes in object:
         button_clicks[i_d].clicked_likes--;
     }
-}
+} */
 
 
 var dislikeButtons = document.getElementsByClassName("dislike-button")
 console.log(dislikeButtons)
 for (var i = 0; i < dislikeButtons.length; i++) {
     //console.log("dislikeButtons.length", dislikeButtons.length)
-    i_d = i;
-    dislikeButtons[i_d].addEventListener('click', addDislike)
+    dislikeButtons[i].addEventListener('click', addDislike)
 }
 
+function removeDislike(event) {
+    
+}
 
+function removeLike(event) {
+    // Go through the button text and subtract 1
+    var par = (event.target).parentNode;
 
-////
+    var like_text = par.getElementsByClassName("like-button")[0].innerText;
+
+    // Loop to decrease the number after the "Like: " in the like button.
+    var str_like = String(like_text);
+    var str_num = "";
+    for (var i = str_like.length - 1; i >= 0; i--) {
+        if (str_like[i] == " ") {
+            break;
+        }
+        str_num += str_like[i];
+    }
+    var num_likes = "";
+    for (var i = str_num.length - 1; i >= 0; i--) {
+        num_likes += str_num[i];
+    }
+    num_likes--;
+    par.getElementsByClassName("like-button")[0].innerText = "Likes: " + num_likes;
+}
+
 function addDislike(event) {
     var dislikeButtons = document.getElementsByClassName("dislike-button")
     console.log("dislikeButtons.length", dislikeButtons.length)
 
-
-    console.log("i_d", i_d); // Remember: For loop adds one at end, so subtract one for correct element position.
     var dislike = (event.target).textContent;
     console.log(dislike)
 
@@ -293,39 +302,32 @@ function addDislike(event) {
         num_dislikes += str_num[i];
     }
 
-    // Check to see if any dislikes previously added using "button_clicks" object and element position (from "i_d" element position in for loop).
-    var num_added_dislikes = button_clicks[i_d].clicked_dislikes;
-    console.log(button_clicks[i_d].clicked_dislikes);
-    if (num_added_dislikes == 0) { // No previous dislikes
+    // Check to see if any dislikes previously added 
+    var par = (event.target).parentNode;
+
+    var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
+    var like_num = par.getElementsByClassName("like_num")[0].innerText;
+    console.log("event.target.parent", par, dislike_num, like_num)
+
+    if (parseInt(dislike_num) === 0) { // No previous dislikes
         num_dislikes++;
         (event.target).textContent = "Dislikes: " + num_dislikes;
         // Increment dislikes in object:
-        button_clicks[i_d].clicked_dislikes++;
+        par.getElementsByClassName("dislike_num")[0].innerText = 1;
         // Now, check to see if there are any *likes* we placed on the post
-        var num_added_likes = button_clicks[i_d].clicked_likes;
-        if (num_added_likes == 1) {
-            //
-            // Come back to this
-            //
-        // num_dislikes-- // For now – late will be replaced
-        // (event.target).textContent = "Dislikes: " + num_dislikes;
+        if (like_num === 1) {
+            // Remove the like in exchange for the dislike
+            par.getElementsByClassName("like_num")[0].innerText = 0;
+            // Go through the button text and subtract 1
+            removeLike(event);
         }
     } else { // There is a previous dislike selected; we need to remove it
         num_dislikes--;
         (event.target).textContent = "Dislikes: " + num_dislikes;
         // Decrement dislikes in object:
-        button_clicks[i_d].clicked_dislikes--;
-    }
+        par.getElementsByClassName("dislike_num")[0].innerText = 0;
+    } 
 }
-
-/*
-function addDislike() {
-   var dislike = document.getElementById("like-button").textContent;
-   var str_dislike = String(dislike);
-} */
-
-
-
 
 function toggleModal() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
