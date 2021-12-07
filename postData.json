@@ -1,11 +1,10 @@
 [
   {
-   "imageSrc": ,
-   "imageText":,
-   "username":,
-   "likes":,
-   "dislikes":,
-   "date":
+   "imageSrc":"./public/images/benny.jpg",
+   "imageText": "Hey! Its Benny! Hi Benny!!!",
+   "username":"@bloopy",
+   "likes": 1,
+   "dislikes": 0,
+   "date": "1/1/1967"
   }
-
 ]
