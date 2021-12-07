@@ -132,7 +132,19 @@ toggleModal()
 
 
 }
+/*function addDislike(event){
+  var dislike = (event.target)
+  console.log(dislike.textContent)
+  var numDislike = dislike.textContent.slice(-1)
+  console.log(+numDislike + +1)
+  dislike.textContent = "Dislike: " + (+numDislike + +1)
 
+}
+var dislikeButtons = document.getElementsByClassName("dislike-button")
+     console.log(dislikeButtons)
+for (var i = 0; i < dislikeButtons.length; i++){
+     dislikeButtons[i].addEventListener('click', addDislike)
+}*/
 function toggleModal() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("post-date-input").value = ""
