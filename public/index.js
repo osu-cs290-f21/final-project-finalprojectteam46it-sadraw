@@ -84,7 +84,7 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
   postTextContents.appendChild(postText)
 
   var postInfoContainer = document.createElement('div')
-  postInfoContainer.classList.add('post-username')
+  postInfoContainer.classList.add('post-info-container')
   postTextContents.appendChild(postInfoContainer)
 
   var postUsername = document.createElement('span')
@@ -94,12 +94,14 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 
   var likeButton = document.createElement('button')
   likeButton.classList.add('like-button')
-  likeButton.textContent = 0
+  likeButton.setAttribute('id','slike-button')
+  likeButton.textContent ="Likes: 0"
   postInfoContainer.appendChild(likeButton)
 
   var dislikeButton = document.createElement('button')
   dislikeButton.classList.add('dislike-button')
-  dislikeButton.textContent = 0
+  dislikeButton.setAttribute('id','dislike-button')
+  dislikeButton.textContent = "Dislikes: 0"
   postInfoContainer.appendChild(dislikeButton)
 
   var postDate = document.createElement('span')
