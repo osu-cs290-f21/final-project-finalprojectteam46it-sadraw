@@ -94,7 +94,7 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 
   var likeButton = document.createElement('button')
   likeButton.classList.add('like-button')
-  likeButton.setAttribute('id','slike-button')
+  likeButton.setAttribute('id','like-button')
   likeButton.textContent ="Likes: 0"
   postInfoContainer.appendChild(likeButton)
 
