@@ -1,5 +1,5 @@
 document.getElementById("post-button").addEventListener("click", toggleModal)
-document.getElementById("modal-close").addEventListener("click", toggleModal)
+document.getElementById("modal-close").addEventListener("click", checkToggleModal)
 document.getElementById("modal-cancel").addEventListener("click", toggleModal)
 document.getElementById("modal-accept").addEventListener("click", modalAccept)
 
@@ -89,6 +89,19 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 
     var postInfoContainer = document.createElement('div')
     postInfoContainer.classList.add('post-info-container')
+
+    var likeCount = document.createElement("p");
+    postInfoContainer.appendChild(likeCount);
+    likeCount.setAttribute("hidden", "");
+    likeCount.setAttribute("class", "like_num");
+    likeCount.innerText = "0";
+    
+    var dislikeCount = document.createElement("p");
+    postInfoContainer.appendChild(dislikeCount);
+    dislikeCount.setAttribute("hidden", "");
+    dislikeCount.setAttribute("class", "dislike_num");
+    dislikeCount.innerText = "0";
+    
     postTextContents.appendChild(postInfoContainer)
 
     var postUsername = document.createElement('span')
@@ -119,6 +132,19 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 
     var dislikeButtons = document.getElementsByClassName("dislike-button")
     console.log(dislikeButtons)
+
+
+    var dislikeButtons = document.getElementsByClassName("dislike-button")
+    console.log(dislikeButtons)
+    for (var i = 0; i < dislikeButtons.length; i++) {
+        dislikeButtons[i].addEventListener('click', addDislike)
+    }
+
+    var likeButtons = document.getElementsByClassName("like-button")
+    console.log(likeButtons)
+    for (var i = 0; i < likeButtons.length; i++) {
+        likeButtons[i].addEventListener('click', addLike)
+    }
     /*
     for (var i = 0; i < dislikeButtons.length; i++) {
         dislikeButtons[i].addEventListener('click', addDislike)
@@ -406,6 +432,12 @@ function addLike(event) {
         (event.target).textContent = "Likes: " + num_likes;
         // Decrement likes in object:
         par.getElementsByClassName("like_num")[0].innerText = 0;
+    }
+}
+
+function checkToggleModal() {
+    if (confirm("Are you sure you want to discard your work? This cannot be undone.")) {
+        toggleModal();
     }
 }
 
