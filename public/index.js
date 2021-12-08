@@ -1,5 +1,5 @@
 document.getElementById("post-button").addEventListener("click", toggleModal)
-document.getElementById("modal-close").addEventListener("click", toggleModal)
+document.getElementById("modal-close").addEventListener("click", checkToggleModal)
 document.getElementById("modal-cancel").addEventListener("click", toggleModal)
 document.getElementById("modal-accept").addEventListener("click", modalAccept)
 
@@ -145,6 +145,13 @@ var dislikeButtons = document.getElementsByClassName("dislike-button")
 for (var i = 0; i < dislikeButtons.length; i++){
      dislikeButtons[i].addEventListener('click', addDislike)
 }*/
+
+function checkToggleModal() {
+    if (confirm("Are you sure you want to discard your work? This cannot be undone.")) {
+        toggleModal();
+    }
+}
+
 function toggleModal() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("post-date-input").value = ""
