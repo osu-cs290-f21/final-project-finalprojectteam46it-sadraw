@@ -3,6 +3,13 @@ body {
     background-color: #14202b;
     color: white;
 }
+
+#posts {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap:wrap
+}
+
 header {
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
@@ -16,13 +23,15 @@ a {
     font-weight: bold;
 }
 .navbar {
-  font-size: 22px;
+  
+    font-size: 22px;
     color: white;
-  background-color: #14202b;
+    background-color: #14202b;
 }
 
 .navlist {
-  margin: 0;
+
+    margin: 0;
     color: white;
 }
 
@@ -55,6 +64,7 @@ a {
   padding: 10px 10px 20px 10px;
 }
 button {
+
     background-color: #14202b;
     border: 1px solid #14202b;
     border-radius: 10%;
@@ -66,6 +76,7 @@ button {
     font-size: 16px;    
 }
 .fas {
+
     position: fixed;
     right: 30px;
     bottom: 30px;
@@ -80,7 +91,7 @@ button {
     color: #fafafa;
     cursor: pointer;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
-    transform: scale(1.2);
+    transform: scale(1.2); 
 }
 .fas:hover {
     transform: scale(1.5);
@@ -88,6 +99,7 @@ button {
     color: #00ba85;
 }
 #canvas{
+
   border: 5px solid #00bf85;
   background: #fafafa;
 }
@@ -153,11 +165,17 @@ button {
   color: #00ba85;
 }
 
+.post-contents {
+  display: inline-block;
+}
+
 .modal-body {
   padding: 20px;
 }
 
 .post-fieldset {
+    display: inline-block;
+
   flex: 1 100%;
   border: 1px solid #ababab;
 }
