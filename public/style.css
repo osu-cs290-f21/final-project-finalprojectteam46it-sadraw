@@ -4,6 +4,11 @@ body {
     color: white;
 }
 
+#your_posts:hover, #all_posts:hover {
+  background-color: rgba(0, 186, 133, 0.08);
+  color: white;
+}
+
 .site-title {
     font-family: 'Comfortaa', sans-serif;
     display: flex;
@@ -44,10 +49,10 @@ a {
 .navitem {
     display: inline-block;
     color: white;
+    
 }
 
 .navitem:hover {
-    background-color: rgba(0, 186, 133, 0.08);
     color: white;
 }
 
@@ -87,8 +92,9 @@ justify-content: flex-end;
   justify-content: flex-end;
   padding: 10px 10px 20px 10px;
 }
-button {
 
+/*
+button {
     background-color: #14202b;
     border: 1px solid #14202b;
     border-radius: 10%;
@@ -98,7 +104,36 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;    
+}*/
+
+.like-button {
+    background-color: #14202b;
+    border: 1px solid #14202b;
+    border-radius: 10%;
+    color:lightgray;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;    
 }
+
+.dislike-button {
+    background-color: #14202b;
+    border: 1px solid #14202b;
+    border-radius: 10%;
+    color:lightgray;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;    
+}
+
+
+
+
+
 .fas {
 
     position: fixed;
@@ -213,20 +248,22 @@ button {
 #modal-cancel,
 #modal-accept {
   margin-right: 20px;
-  color: #fafafa;
+  color: black;
 }
+
 #modal-cancel:hover,
 #modal-accept:hover {
   margin-right: 20px;
-  color: #00ba85;
+  color: green;
 }
 
 #clear,
 #modal-cancel {
-  color: #fafafa;
+  color: black;
 }
 
 #clear:hover,
 #modal-cancel:hover {
   color: #00ba85;
 }
+
