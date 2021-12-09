@@ -4,18 +4,26 @@
 <head>
   <meta charset="utf-8">
   <title>It's A Draw</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+  
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 
+  
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
   <script src="photoCardTemplate.js" charset="utf-8" defer></script>
   <script src="index.js" charset="utf-8" defer></script>
 </head>
 
 <body>
-
+  
   <header>
     <h1 class="site-title">It's A Draw</h1>
   </header>
@@ -24,11 +32,15 @@
     <ul class="navlist">
       <li class="navitem"><a href="/">Your posts</a></li>
       <li class="navitem"><a href="/allPosts">All Posts</a></li>
+    </ul>
+  </nav>
+  <nav class="search_bars">
+    <ul class="navlist">
       <li class="navitem right">
         <label for="username-input">Username</label>
         <input type="text" id="username-input">
       </li>
-      <li class="navitem right">
+      <li class="navitem left">
         <label for="username-input">Search</label>
         <input type="text" id="username-input">
       </li>
@@ -40,7 +52,7 @@
       <div class="post">
         <div class="post-contents">
           <div class="post-image-container">
-            <img src="images/benny.jpg">
+            <img src="images/ex_tree.png">
           </div>
           <div class="post-text-container">
             <div href="#" class="post-text">Test</div>
