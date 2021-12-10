@@ -6,7 +6,7 @@ document.getElementById("modal-accept").addEventListener("click", modalAccept)
 document.getElementById("brush-size-input").addEventListener("input", drawSize)
 document.getElementById("color-draw-input").addEventListener("input", drawColor)
 
-document.getElementById("username-input").addEventListener("input", searchPosts)
+document.getElementById("search-input").addEventListener("input", searchPosts)
 
 var yourPosts = [];
 
@@ -34,11 +34,12 @@ function doFilterUpdate(input) {
     const myNode = document.getElementById("posts");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild);
-    } 
+    }
     var tally = 0;
-    for (var i = 0; i < ArrayCollection.length; i++) { 
+    for (var i = 0; i < ArrayCollection.length; i++) {
         var post_name = ArrayCollection[i].getElementsByClassName('post-text')[0].innerText;
-        if (post_name === input) {
+        var post_user = ArrayCollection[i].getElementsByClassName('post-username')[0].innerText;
+        if ((post_name === input) || (post_user === input)) {
         } else {
             tally++;
         }
@@ -46,8 +47,8 @@ function doFilterUpdate(input) {
         if (tally === 0) {
             document.getElementById('posts').appendChild(ArrayCollection[i]);
         }
-    } 
-} 
+    }
+}
 
 function searchPosts() {
     input = searched.value;
@@ -393,7 +394,7 @@ function setButtonColor(event) {
     } else if (dislike_num == 0) {
         par.getElementsByClassName("dislike-button")[0].style.color = "lightgray";
     }
-} 
+}
 
 function checkToggleModal() {
     if (confirm("Are you sure you want to discard your work? \nThis cannot be undone.")) {
