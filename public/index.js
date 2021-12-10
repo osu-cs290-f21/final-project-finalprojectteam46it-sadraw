@@ -76,7 +76,7 @@ clearEl.addEventListener("click", () => {
 function modalAccept() { /*Old way to do html insert I'll do both but somethings need to be done before hand to check*/
     var canvasData = canvas.toDataURL("image/png");
     console.log(canvasData)
-    var newPost = document.createElement('div')
+  /*  var newPost = document.createElement('div')
     newPost.classList.add('post')
 
     var postContentsDiv = document.createElement('div')
@@ -156,9 +156,28 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
     console.log(likeButtons)
     for (var i = 0; i < likeButtons.length; i++) {
         likeButtons[i].addEventListener('click', addLike)
-    }
-    toggleModal()
+    }*/
+
+    var context = {
+  imageSrc: canvasData,
+  imageText: document.getElementById("post-text-input").value,
+  username: document.getElementById("username-input").value,
+  likes: 0,
+  dislikes: 0,
+  date: document.getElementById("post-date-input").value
 }
+var newPost = Handlebars.templates.post(context)
+var postsSection = document.getElementById('posts');
+postsSection.insertAdjacentHTML('beforeend',newPost)
+var dislikeButtons = document.getElementsByClassName("dislike-button")
+     console.log(dislikeButtons)
+for (var i = 0; i < dislikeButtons.length; i++){
+     dislikeButtons[i].addEventListener('click', addDislike)
+}
+toggleModal()
+
+}
+
 
 var dislikeButtons = document.getElementsByClassName("dislike-button")
 console.log(dislikeButtons)
@@ -247,7 +266,7 @@ function addDislike(event) {
         num_dislikes += str_num[i];
     }
 
-    // Check to see if any dislikes previously added 
+    // Check to see if any dislikes previously added
     var par = (event.target).parentNode;
 
     var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
@@ -305,7 +324,7 @@ function addLike(event) {
         num_likes += str_num[i];
     }
 
-    // Check to see if any dislikes previously added 
+    // Check to see if any dislikes previously added
     var par = (event.target).parentNode;
 
     var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
@@ -357,7 +376,7 @@ function setButtonColor(event) {
     } else if (dislike_num == 0) {
         par.getElementsByClassName("dislike-button")[0].style.color = "lightgray";
     }
-} 
+}
 
 function checkToggleModal() {
     if (confirm("Are you sure you want to discard your work? \nThis cannot be undone.")) {
