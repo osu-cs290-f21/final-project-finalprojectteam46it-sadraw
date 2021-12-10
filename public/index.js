@@ -87,7 +87,7 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
   postInfoContainer.classList.add('post-info-container')
   postTextContents.appendChild(postInfoContainer)
 
-  var postUsername = document.createElement('span')
+  var postUsername = document.createElement('a')
   postUsername.classList.add('post-username')
   postUsername.textContent = document.getElementById("username-input").value
   postInfoContainer.appendChild(postUsername)
@@ -101,6 +101,7 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
   var dislikeButton = document.createElement('button')
   dislikeButton.classList.add('dislike-button')
   dislikeButton.setAttribute('id','dislike-button')
+  dislikeButton.setAttribute('type','button')
   dislikeButton.textContent = "Dislikes: 0"
   postInfoContainer.appendChild(dislikeButton)
 
@@ -112,7 +113,11 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 
   yourPosts.push(newPost)
   document.getElementById("posts").appendChild(newPost)
-
+  var dislikeButtons = document.getElementsByClassName("dislike-button")
+       console.log(dislikeButtons)
+  for (var i = 0; i < dislikeButtons.length; i++){
+       dislikeButtons[i].addEventListener('click', addDislike)
+  }
 
   toggleModal()
 /* uses template
@@ -127,12 +132,18 @@ var context = {
 var newPost = Handlebars.templates.post(context)
 var postsSection = document.getElementById('posts');
 postsSection.insertAdjacentHTML('beforeend',newPost)
+var dislikeButtons = document.getElementsByClassName("dislike-button")
+     console.log(dislikeButtons)
+for (var i = 0; i < dislikeButtons.length; i++){
+     dislikeButtons[i].addEventListener('click', addDislike)
+}
 toggleModal()
+
 */
 
 
 }
-/*function addDislike(event){
+function addDislike(event){
   var dislike = (event.target)
   console.log(dislike.textContent)
   var numDislike = dislike.textContent.slice(-1)
@@ -144,7 +155,7 @@ var dislikeButtons = document.getElementsByClassName("dislike-button")
      console.log(dislikeButtons)
 for (var i = 0; i < dislikeButtons.length; i++){
      dislikeButtons[i].addEventListener('click', addDislike)
-}*/
+}
 function toggleModal() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById("post-date-input").value = ""
