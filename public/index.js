@@ -9,6 +9,9 @@ document.getElementById("color-draw-input").addEventListener("input", drawColor)
 document.getElementById("search-input").addEventListener("input", searchPosts)
 document.getElementById("username-input").addEventListener("input", searchUsers)
 
+document.getElementById("canvas_background").addEventListener("input", fillCanvas)
+document.getElementById("draw_tools").addEventListener("input", useTools)
+
 var yourPosts = [];
 
 var brush_size_input = document.getElementById("brush-size-input");
@@ -121,7 +124,7 @@ function validColor(strColor) {
 }
 
 function drawSize() {
-    if (brush_size_input.value) {
+    if (!isNaN(brush_size_input.value)) {
         size = brush_size_input.value;
     }
     console.log(size)
@@ -132,6 +135,34 @@ function drawColor() {
         color = brush_color.value;
     }
     console.log(color)
+}
+
+function fillCanvas(event) {
+    var val = event.target.value;
+    if (val == "black") {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "transparent") {
+        ctx.fillStyle = "transparent";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "white") {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "sepia") {
+        ctx.fillStyle = "rgb(112, 66, 20)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+function useTools(event) {
+    var val = event.target.value;
+    if (val == "eraser") {
+        color = "white";
+    } else if (val == "bucket") {
+        /*
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height); */
+    }
 }
 
 canvas.addEventListener("mousedown", (e) => {
@@ -160,10 +191,19 @@ canvas.addEventListener("mousemove", (e) => {
 });
 
 function drawCircle(x, y) {
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = color;
-    ctx.fill();
+    var tools = document.getElementById("draw_tools");
+    if (tools.value == "bucket") {
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    else {
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+    }
+
 }
 
 function drawLine(x1, y1, x2, y2) {
