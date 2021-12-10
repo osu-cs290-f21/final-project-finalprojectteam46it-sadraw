@@ -40,7 +40,9 @@ function doFilterUpdate(input) {
         console.log("post_name", post_name[0].innerText)
         var post_user = ArrayCollection[i].getElementsByClassName('post-username');
         var user_txt = post_user[0].innerText;
-        if ((name_txt === input) || (user_txt === input)) {
+        // Checks if any word is present in input text.
+        // Work Cited: https://stackoverflow.com/a/37089247/12771911
+        if ((String(user_txt).includes(input)) || (String(name_txt).includes(input))) {
         } else {
             tally++;
         }
@@ -60,16 +62,27 @@ function searchPosts() {
     doFilterUpdate(input);
 }
 
+// Checks if valid color
+// Work Cited: 
+// https://stackoverflow.com/a/48485007/12771911
+function validColor(strColor) {
+    var s = new Option().style;
+    s.color = strColor;
+    return s.color == strColor;
+}
+
 function drawSize() {
-    if (!isNaN(brush_size_input.value)) {
+    if (brush_size_input.value) {
         size = brush_size_input.value;
     }
     console.log(size)
 }
 
 function drawColor() {
-    color = brush_color.value;
-    console.log(size)
+    if (validColor(brush_color.value)) {
+        color = brush_color.value;
+    }
+    console.log(color)
 }
 
 canvas.addEventListener("mousedown", (e) => {
