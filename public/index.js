@@ -35,29 +35,35 @@ function doFilterUpdate(input) {
     }
     var tally = 0;
     for (var i = 0; i < ArrayCollection.length; i++) {
-        var post_name = ArrayCollection[i].getElementsByClassName('post-text')[0].innerText;
-        var post_user = ArrayCollection[i].getElementsByClassName('post-username')[0].innerText;
-        if ((post_name === input) || (post_user === input)) {
+        var post_name = ArrayCollection[i].getElementsByClassName('post-text');
+        var name_txt = post_name[0].innerText;
+        console.log("post_name", post_name[0].innerText)
+        var post_user = ArrayCollection[i].getElementsByClassName('post-username');
+        var user_txt = post_user[0].innerText;
+        if ((name_txt === input) || (user_txt === input)) {
         } else {
             tally++;
         }
         console.log("tally", tally)
         if (tally === 0) {
-            document.getElementById('posts').appendChild(ArrayCollection[i]);
-        }
-    }
+            document.getElementById('posts').appendChild(ArrayCollection[i]); 
+        } 
+        // Reset counter
+        tally = 0; 
+    } 
 }
 
 function searchPosts() {
     var searched = document.getElementById("search-input");
-
     input = searched.value;
     console.log(input)
     doFilterUpdate(input);
 }
 
 function drawSize() {
-    size = brush_size_input.value;
+    if (!isNaN(brush_size_input.value)) {
+        size = brush_size_input.value;
+    }
     console.log(size)
 }
 
@@ -68,7 +74,6 @@ function drawColor() {
 
 canvas.addEventListener("mousedown", (e) => {
     isPressed = true;
-
     x = e.offsetX;
     y = e.offsetY;
 });
