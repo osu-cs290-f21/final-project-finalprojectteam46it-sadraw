@@ -47,7 +47,6 @@ function doFilterUpdate(input) {
             document.getElementById('posts').appendChild(ArrayCollection[i]);
         }
     } 
-    tally_incorrect = 0;
 } 
 
 function searchPosts() {
