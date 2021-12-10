@@ -1,10 +1,15 @@
 document.getElementById("post-button").addEventListener("click", toggleModal)
 document.getElementById("modal-close").addEventListener("click", checkToggleModal)
-document.getElementById("modal-cancel").addEventListener("click", toggleModal)
+document.getElementById("modal-cancel").addEventListener("click", checkToggleModal)
 document.getElementById("modal-accept").addEventListener("click", modalAccept)
+
+document.getElementById("brush-size-input").addEventListener("input", drawSize)
+document.getElementById("color-draw-input").addEventListener("input", drawColor)
 
 var yourPosts = [];
 
+var brush_size_input = document.getElementById("brush-size-input");
+var brush_color = document.getElementById("color-draw-input");
 const canvas = document.getElementById("canvas");
 const clearEl = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
@@ -13,6 +18,16 @@ let isPressed = false;
 let color = "black";
 let x = undefined;
 let y = undefined;
+
+function drawSize() {
+    size = brush_size_input.value;
+    console.log(size)
+}
+
+function drawColor() {
+    color = brush_color.value;
+    console.log(size)
+}
 
 canvas.addEventListener("mousedown", (e) => {
     isPressed = true;
@@ -57,6 +72,7 @@ function drawLine(x1, y1, x2, y2) {
 clearEl.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
+
 function modalAccept() { /*Old way to do html insert I'll do both but somethings need to be done before hand to check*/
     var canvasData = canvas.toDataURL("image/png");
     console.log(canvasData)
@@ -92,13 +108,13 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
     likeCount.setAttribute("hidden", "");
     likeCount.setAttribute("class", "like_num");
     likeCount.innerText = "0";
-    
+
     var dislikeCount = document.createElement("p");
     postInfoContainer.appendChild(dislikeCount);
     dislikeCount.setAttribute("hidden", "");
     dislikeCount.setAttribute("class", "dislike_num");
     dislikeCount.innerText = "0";
-    
+
     postTextContents.appendChild(postInfoContainer)
 
     var postUsername = document.createElement('span')
@@ -177,7 +193,7 @@ function removeDislike(event) {
     }
     num_dislikes--;
     par.getElementsByClassName("dislike-button")[0].innerText = "Dislikes: " + num_dislikes;
-    
+
 }
 
 function removeLike(event) {
@@ -255,10 +271,13 @@ function addDislike(event) {
         (event.target).textContent = "Dislikes: " + num_dislikes;
         // Decrement dislikes in object:
         par.getElementsByClassName("dislike_num")[0].innerText = 0;
-    } 
+    }
+    // Set color of button clicked.
+    setButtonColor(event);
 }
 
 function addLike(event) {
+
     var likeButtons = document.getElementsByClassName("like-button")
     console.log("likeButtons.length", likeButtons.length)
 
@@ -311,10 +330,37 @@ function addLike(event) {
         // Decrement likes in object:
         par.getElementsByClassName("like_num")[0].innerText = 0;
     }
+
+    // Set color of button clicked.
+    setButtonColor(event);
 }
 
+function setButtonColor(event) {
+    // Parent of what was clicked.
+    var par = (event.target).parentNode;
+    // Look in child of that parent for "like_num" class
+    var like_num = par.getElementsByClassName("like_num")[0].innerText;
+    // Look in child of that parent for "dislike_num" class
+    var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
+    console.log("like_num", like_num);
+    console.log("dislike_num", dislike_num);
+
+    // Checks which buttons were selected.
+    if (like_num == 1) {
+        console.log("GREEN COLOR!");
+        par.getElementsByClassName("like-button")[0].style.color = "lime";
+    } else if (like_num == 0) {
+        par.getElementsByClassName("like-button")[0].style.color = "lightgray";
+    } if (dislike_num == 1) {
+        console.log("RED COLOR!");
+        par.getElementsByClassName("dislike-button")[0].style.color = "red";
+    } else if (dislike_num == 0) {
+        par.getElementsByClassName("dislike-button")[0].style.color = "lightgray";
+    }
+} 
+
 function checkToggleModal() {
-    if (confirm("Are you sure you want to discard your work? This cannot be undone.")) {
+    if (confirm("Are you sure you want to discard your work? \nThis cannot be undone.")) {
         toggleModal();
     }
 }
