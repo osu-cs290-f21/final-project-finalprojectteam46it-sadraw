@@ -1,28 +1,5 @@
 <main class="home">
-  <!DOCTYPE html>
-  <html>
-  <header>
-      <div class="header-image-container">
-          <img src="images/iad_logo.png" width="150" height="150">
-      </div>
-    <h1 class="site-title">It's A Draw</h1>
-  </header>
 
-  <nav class="navbar">
-    <ul class="navlist">
-      <li class="navitem"><a href="/">Your posts</a></li>
-      <li class="navitem"><a href="/allPosts">All Posts</a></li>
-      <li class="navitem right">
-        <label for="username-input">Username</label>
-        <input type="text" id="username-input">
-      </li>
-      <li class="navitem right">
-        <label for="username-input">Search</label>
-        <input type="text" id="username-input">
-      </li>
-    </ul>
-  </nav>
-  </html>
 
   <section id="posts">
 
@@ -31,7 +8,6 @@
           {{/each}}
 
       </section>
-
       <button type="button" id="post-button"><i class="fas fa-plus"></i></button>
 
       <div id="modal-backdrop" class="hidden"></div>
@@ -57,14 +33,44 @@
               <input type="text" id="post-date-input">
             </div>
 
+            <div class="canvas_select">
+              <label for="background">Canvas Type:</label>
+              <select name="background" id="canvas_background">
+                <option value="clear">Clear</option>
+                <option value="white">Whiteboard</option>
+                <option value="black">Chalkboard</option>
+                <option value="sepia">Sepia</option>
+              </select>
+            </div>
+
+           <div class="draw_select">
+             <label for="drawing">Draw Tool:</label>
+             <select name="drawing" id="draw_tools">
+               <option value="brush">Brush</option>
+               <option value="eraser">Eraser</option>
+               <option value="bucket">Bucket</option>
+             </select>
+           </div>
+
+            <div class="brush-input-element">
+              <label for="brush-size-input">Tool Size</label>
+              <input type="text" id="brush-size-input"></input>
+            </div>
+
+            <div class="color-input-element">
+              <label for="color-draw-input">Draw Color</label>
+              <input type="text" id="color-draw-input"></input>
+            </div>
+
           </div>
 
           <div class="modal-footer">
             <button type="button" id="modal-cancel" class="modal-hide-button action-button">Cancel</button>
             <button type="button" id="modal-accept" class="action-button">Create Post</button>
-            <button type="button" id="clear" class="action-button">Clear</button>
+            <button type="button" id="clear">Clear</button>
           </div>
 
         </div>
       </div>
+
 </main>
