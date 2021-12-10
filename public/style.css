@@ -4,6 +4,11 @@ body {
     color: white;
 }
 
+#your_posts:hover, #all_posts:hover {
+  background-color: rgba(0, 186, 133, 0.08);
+  color: white;
+}
+
 .site-title {
     font-family: 'Comfortaa', sans-serif;
     display: flex;
@@ -44,10 +49,10 @@ a {
 .navitem {
     display: inline-block;
     color: white;
+    
 }
 
 .navitem:hover {
-    background-color: rgba(0, 186, 133, 0.08);
     color: white;
 }
 
@@ -64,20 +69,15 @@ a {
 
 .navitem.right {
 
-justify-content: flex-end;
-
-  
-   display: flex;
-    color: white;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
 }
 
 .navitem.left {
-  
-justify-content: flex-end;
-
-
-    display: flex;
-    color: white;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
 }
 .hidden {
   display: none;
@@ -87,18 +87,31 @@ justify-content: flex-end;
   justify-content: flex-end;
   padding: 10px 10px 20px 10px;
 }
-button {
 
+.like-button {
     background-color: #14202b;
     border: 1px solid #14202b;
     border-radius: 10%;
-    color: #00ba85;
+    color:lightgray;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;    
 }
+
+.dislike-button {
+    background-color: #14202b;
+    border: 1px solid #14202b;
+    border-radius: 10%;
+    color:lightgray;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;    
+}
+
 .fas {
 
     position: fixed;
@@ -155,7 +168,7 @@ button {
 
 .modal-dialog {
   width: auto;
-  max-width: 600px;
+  max-width: 700px;
   min-width: 350px;
   min-height: 300px;
   margin: 40px auto;
@@ -194,7 +207,42 @@ button {
 }
 
 .modal-body {
+
+  position: relative;
   padding: 20px;
+}
+
+.draw_select {
+
+  position: absolute; 
+  top: 30px; 
+  right: 10px; 
+}
+#draw_tools {
+   width:150px;   
+
+}
+
+.canvas_select {
+  position: absolute; 
+  top: 61px; 
+  right: 10px; 
+}
+#canvas_background {
+ width:150px;   
+
+}
+
+.color-input-element {
+  position: absolute; 
+  top: 91px; 
+  right: 10px; 
+}
+
+.brush-input-element {
+  position: absolute; 
+  top: 121px; 
+  right: 10px; 
 }
 
 .post-fieldset {
@@ -213,20 +261,26 @@ button {
 #modal-cancel,
 #modal-accept {
   margin-right: 20px;
-  color: #fafafa;
+  color: black;
 }
+
+#canvas:hover {
+    cursor: crosshair;
+}
+
 #modal-cancel:hover,
 #modal-accept:hover {
   margin-right: 20px;
-  color: #00ba85;
+  color: green;
 }
 
 #clear,
 #modal-cancel {
-  color: #fafafa;
+  color: black;
 }
 
 #clear:hover,
 #modal-cancel:hover {
   color: #00ba85;
 }
+
