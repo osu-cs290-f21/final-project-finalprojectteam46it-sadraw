@@ -7,6 +7,10 @@ document.getElementById("brush-size-input").addEventListener("input", drawSize)
 document.getElementById("color-draw-input").addEventListener("input", drawColor)
 
 document.getElementById("search-input").addEventListener("input", searchPosts)
+document.getElementById("username-input").addEventListener("input", searchUsers)
+
+document.getElementById("canvas_background").addEventListener("input", fillCanvas)
+document.getElementById("draw_tools").addEventListener("input", useTools)
 
 var yourPosts = [];
 
@@ -28,7 +32,41 @@ let color = "black";
 let x = undefined;
 let y = undefined;
 
-function doFilterUpdate(input) {
+// Random likes/dislikes generated for each post.
+// Stored to memory.
+if (localStorage == null) {
+    var rand_likes = parseInt((Math.random() * 1000) % 100);
+    var rand_dislikes = parseInt((Math.random() * 1000) % 30);
+    var increment = parseInt((Math.random() * 1000) % 20);
+    
+    localStorage.setItem("rand_likes", rand_likes);
+    localStorage.setItem("rand_dislikes", rand_dislikes);
+    localStorage.setItem("increment", increment);
+}
+
+window.addEventListener('load', (event) => {
+    if (localStorage.getItem("load") > 0) {
+        return; // Leave function if page was loaded.
+    }
+    for (var i = 0; i < ArrayCollection.length; i++) {
+        // Increment must be an int to later add and multiply:
+        var increment = localStorage.getItem("increment");
+         increment = parseInt(increment) * i;
+
+        var rand_likes = localStorage.getItem("rand_likes") + increment;
+        var rand_dislikes = localStorage.getItem("rand_dislikes") + increment;
+     
+        var likes_elem = ArrayCollection[i].getElementsByClassName("like-button");
+        var likes = likes_elem[0].innerText = "Likes: " + rand_likes;
+
+        var dislikes_elem = ArrayCollection[i].getElementsByClassName("dislike-button");
+        var dislikes = dislikes_elem[0].innerText = "Dislikes: " + rand_dislikes;
+
+        console.log("rand_likes", rand_likes, "rand_dislikes", rand_dislikes)
+    }
+});
+
+function doFilterUpdate(input, val) {
     const myNode = document.getElementById("posts");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild);
@@ -42,9 +80,16 @@ function doFilterUpdate(input) {
         var user_txt = post_user[0].innerText;
         // Checks if any word is present in input text.
         // Work Cited: https://stackoverflow.com/a/37089247/12771911
-        if ((String(user_txt).includes(input)) || (String(name_txt).includes(input))) {
-        } else {
-            tally++;
+        if (val === 1) {
+            if ((String(user_txt).includes(input)) || (String(name_txt).includes(input))) {
+            } else {
+                tally++;
+            }
+        } else if (val === 0) {
+            if (String(user_txt).includes(input)) {
+            } else {
+                tally++;
+            }
         }
         console.log("tally", tally)
         if (tally === 0) {
@@ -59,7 +104,14 @@ function searchPosts() {
     var searched = document.getElementById("search-input");
     input = searched.value;
     console.log(input)
-    doFilterUpdate(input);
+    doFilterUpdate(input, 1);
+}
+
+function searchUsers() {
+    var searched = document.getElementById("username-input");
+    input = searched.value;
+    console.log(input)
+    doFilterUpdate(input, 0);
 }
 
 // Checks if valid color
@@ -72,7 +124,7 @@ function validColor(strColor) {
 }
 
 function drawSize() {
-    if (brush_size_input.value) {
+    if (!isNaN(brush_size_input.value)) {
         size = brush_size_input.value;
     }
     console.log(size)
@@ -83,6 +135,34 @@ function drawColor() {
         color = brush_color.value;
     }
     console.log(color)
+}
+
+function fillCanvas(event) {
+    var val = event.target.value;
+    if (val == "black") {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "transparent") {
+        ctx.fillStyle = "transparent";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "white") {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (val == "sepia") {
+        ctx.fillStyle = "rgb(112, 66, 20)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+function useTools(event) {
+    var val = event.target.value;
+    if (val == "eraser") {
+        color = "white";
+    } else if (val == "bucket") {
+        /*
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height); */
+    }
 }
 
 canvas.addEventListener("mousedown", (e) => {
@@ -111,10 +191,19 @@ canvas.addEventListener("mousemove", (e) => {
 });
 
 function drawCircle(x, y) {
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = color;
-    ctx.fill();
+    var tools = document.getElementById("draw_tools");
+    if (tools.value == "bucket") {
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    else {
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+    }
+
 }
 
 function drawLine(x1, y1, x2, y2) {
