@@ -1,46 +1,27 @@
-var path = require('path'); // Set the home path variable
-var express = require('express'); // Get express.js
-var app = express(); // Define express to fit within these parameters
-var port = process.env.PORT || 3000; // Set the port and port environment variable to 3000
+var path = require('path');
+var express = require('express');
+var exphbs = require('express-handlebars')
+var postData = require('./postData.json')
+console.log("==postData:", postData)
 
-// ######## var postData = require('./postData');
+var app = express();
+var port = process.env.PORT || 3000;
 
-// Define handlebars.express.js in a sense
-var handlebars = require('express-handlebars');
+app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
 
-var hbsNgin = handlebars.create({
-    defaultLayout: 'main',
-    partialsDir: ['views/partials/']
-});
-
-
-// Set 'handlebars' as the viewing engine
-app.set('view engine', 'handlebars');
-
-// Set the viewing engine as handlebars
-app.engine('handlebars', hbsNgin.engine);
-
-// Use the public directory as the place for all the working files on the main home page
 app.use(express.static('public'));
 
-// The home page so that localhost:3000 == localhost:3000/
-
-app.get('/', function (req, res, next) {
-  /*
-    console.log("== client requesting home template");
-    res.status(200).render('homePage', postData); */
-}); 
-
-/*
-// Open the 404 page with the handlebars template
-app.get('*', function (req, res) { // the 404 page is stored in views
-  console.log("== Throw the 404 for a bad directory");
-  res.status(404).render('404');
-});
-*/
-
-app.get('./', (req, res) => {
-    res.render('main', {layout: 'index'});
+app.get('/', function (req, res, next){
+  if(postData){
+  var postInfo = {
+    posts: postData,
+  }
+  res.status(200).render('homePage', postInfo)
+} else {
+  //res.status(200).sendFile(path.join(__dirname, 'public', 'index.html')); // change later
+  next()
+}
 });
 
 // If none of previous found, 404 Page
