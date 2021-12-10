@@ -13,8 +13,6 @@ var yourPosts = [];
 var brush_size_input = document.getElementById("brush-size-input");
 var brush_color = document.getElementById("color-draw-input");
 
-var searched = document.getElementById("username-input");
-
 // Store Live HTML Collection into an Array
 var LiveHTMLCollection = document.getElementsByClassName("post");
 ArrayCollection = Array.from(LiveHTMLCollection);
@@ -51,6 +49,8 @@ function doFilterUpdate(input) {
 }
 
 function searchPosts() {
+    var searched = document.getElementById("search-input");
+
     input = searched.value;
     console.log(input)
     doFilterUpdate(input);
