@@ -44,26 +44,21 @@ a {
     margin: 0;
     text-align: center;
     color: white;
-    cursor: default;
 }
 
 .navitem {
     display: inline-block;
     color: white;
-    cursor: default;
-    
 }
 
 .navitem:hover {
     color: white;
-    cursor: default;
 }
 
 .navitem a {
     display: inline-block;
     color: white;
     padding: 10px 20px;
-    cursor: default;
 }
 
 .search_bars {
