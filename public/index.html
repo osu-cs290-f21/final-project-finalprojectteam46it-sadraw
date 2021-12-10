@@ -91,8 +91,27 @@
           <input type="text" id="post-date-input">
         </div>
 
+        <div class="canvas_select">
+          <label for="background">Canvas Type:</label>
+          <select name="background" id="canvas_background">
+            <option value="clear">Clear</option>
+            <option value="white">Whiteboard</option>
+            <option value="black">Chalkboard</option>
+            <option value="sepia">Sepia</option>
+          </select>
+        </div>
+
+       <div class="draw_select">
+         <label for="drawing">Draw Tool:</label>
+         <select name="drawing" id="draw_tools">
+           <option value="brush">Brush</option>
+           <option value="eraser">Eraser</option>
+           <option value="bucket">Bucket</option>
+         </select>
+       </div>
+
         <div class="brush-input-element">
-          <label for="brush-size-input">Brush Size</label>
+          <label for="brush-size-input">Tool Size</label>
           <input type="text" id="brush-size-input"></input>
         </div>
 

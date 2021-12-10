@@ -19,7 +19,6 @@ let color = "black";
 let x = undefined;
 let y = undefined;
 
-
 function drawSize() {
     size = brush_size_input.value;
     console.log(size)

@@ -207,19 +207,41 @@ a {
 }
 
 .modal-body {
+
   position: relative;
   padding: 20px;
 }
 
-.brush-input-element {
+.draw_select {
+
   position: absolute; 
-  top: 10px; 
+  top: 30px; 
   right: 10px; 
+}
+#draw_tools {
+   width:150px;   
+
+}
+
+.canvas_select {
+  position: absolute; 
+  top: 61px; 
+  right: 10px; 
+}
+#canvas_background {
+ width:150px;   
+
 }
 
 .color-input-element {
   position: absolute; 
-  top: 31px; 
+  top: 91px; 
+  right: 10px; 
+}
+
+.brush-input-element {
+  position: absolute; 
+  top: 121px; 
   right: 10px; 
 }
 
