@@ -3,8 +3,13 @@ document.getElementById("modal-close").addEventListener("click", checkToggleModa
 document.getElementById("modal-cancel").addEventListener("click", checkToggleModal)
 document.getElementById("modal-accept").addEventListener("click", modalAccept)
 
+document.getElementById("brush-size-input").addEventListener("input", drawSize)
+document.getElementById("color-draw-input").addEventListener("input", drawColor)
+
 var yourPosts = [];
 
+var brush_size_input = document.getElementById("brush-size-input");
+var brush_color = document.getElementById("color-draw-input");
 const canvas = document.getElementById("canvas");
 const clearEl = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
@@ -13,6 +18,17 @@ let isPressed = false;
 let color = "black";
 let x = undefined;
 let y = undefined;
+
+
+function drawSize() {
+    size = brush_size_input.value;
+    console.log(size)
+}
+
+function drawColor() {
+    color = brush_color.value;
+    console.log(size)
+}
 
 canvas.addEventListener("mousedown", (e) => {
     isPressed = true;
@@ -57,6 +73,7 @@ function drawLine(x1, y1, x2, y2) {
 clearEl.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
+
 function modalAccept() { /*Old way to do html insert I'll do both but somethings need to be done before hand to check*/
     var canvasData = canvas.toDataURL("image/png");
     console.log(canvasData)
@@ -320,8 +337,7 @@ function addLike(event) {
 }
 
 function setButtonColor(event) {
-    console.log("FCU")
-    // Parent of what was clicked
+    // Parent of what was clicked.
     var par = (event.target).parentNode;
     // Look in child of that parent for "like_num" class
     var like_num = par.getElementsByClassName("like_num")[0].innerText;
@@ -330,7 +346,7 @@ function setButtonColor(event) {
     console.log("like_num", like_num);
     console.log("dislike_num", dislike_num);
 
-
+    // Checks which buttons were selected.
     if (like_num == 1) {
         console.log("GREEN COLOR!");
         par.getElementsByClassName("like-button")[0].style.color = "lime";
@@ -342,12 +358,7 @@ function setButtonColor(event) {
     } else if (dislike_num == 0) {
         par.getElementsByClassName("dislike-button")[0].style.color = "lightgray";
     }
-    
-    
-    
-    
 } 
-
 
 function checkToggleModal() {
     if (confirm("Are you sure you want to discard your work? \nThis cannot be undone.")) {

@@ -69,20 +69,15 @@ a {
 
 .navitem.right {
 
-justify-content: flex-end;
-
-  
-   display: flex;
-    color: white;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
 }
 
 .navitem.left {
-  
-justify-content: flex-end;
-
-
-    display: flex;
-    color: white;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
 }
 .hidden {
   display: none;
@@ -92,19 +87,6 @@ justify-content: flex-end;
   justify-content: flex-end;
   padding: 10px 10px 20px 10px;
 }
-
-/*
-button {
-    background-color: #14202b;
-    border: 1px solid #14202b;
-    border-radius: 10%;
-    color: #00ba85;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;    
-}*/
 
 .like-button {
     background-color: #14202b;
@@ -129,10 +111,6 @@ button {
     display: inline-block;
     font-size: 16px;    
 }
-
-
-
-
 
 .fas {
 
@@ -190,7 +168,7 @@ button {
 
 .modal-dialog {
   width: auto;
-  max-width: 600px;
+  max-width: 700px;
   min-width: 350px;
   min-height: 300px;
   margin: 40px auto;
@@ -229,7 +207,20 @@ button {
 }
 
 .modal-body {
+  position: relative;
   padding: 20px;
+}
+
+.brush-input-element {
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+}
+
+.color-input-element {
+  position: absolute; 
+  top: 31px; 
+  right: 10px; 
 }
 
 .post-fieldset {
@@ -249,6 +240,10 @@ button {
 #modal-accept {
   margin-right: 20px;
   color: black;
+}
+
+#canvas:hover {
+    cursor: crosshair;
 }
 
 #modal-cancel:hover,
