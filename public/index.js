@@ -6,10 +6,21 @@ document.getElementById("modal-accept").addEventListener("click", modalAccept)
 document.getElementById("brush-size-input").addEventListener("input", drawSize)
 document.getElementById("color-draw-input").addEventListener("input", drawColor)
 
+document.getElementById("username-input").addEventListener("input", searchPosts)
+
 var yourPosts = [];
 
 var brush_size_input = document.getElementById("brush-size-input");
 var brush_color = document.getElementById("color-draw-input");
+
+var searched = document.getElementById("username-input");
+
+// Store Live HTML Collection into an Array
+var LiveHTMLCollection = document.getElementsByClassName("post");
+ArrayCollection = Array.from(LiveHTMLCollection);
+
+console.log("ArrayCollection", ArrayCollection);
+
 const canvas = document.getElementById("canvas");
 const clearEl = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
@@ -18,6 +29,32 @@ let isPressed = false;
 let color = "black";
 let x = undefined;
 let y = undefined;
+
+function doFilterUpdate(input) {
+    const myNode = document.getElementById("posts");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
+    } 
+    var tally = 0;
+    for (var i = 0; i < ArrayCollection.length; i++) { 
+        var post_name = ArrayCollection[i].getElementsByClassName('post-text')[0].innerText;
+        if (post_name === input) {
+        } else {
+            tally++;
+        }
+        console.log("tally", tally)
+        if (tally === 0) {
+            document.getElementById('posts').appendChild(ArrayCollection[i]);
+        }
+    } 
+    tally_incorrect = 0;
+} 
+
+function searchPosts() {
+    input = searched.value;
+    console.log(input)
+    doFilterUpdate(input);
+}
 
 function drawSize() {
     size = brush_size_input.value;
@@ -54,6 +91,7 @@ canvas.addEventListener("mousemove", (e) => {
         y = y2;
     }
 });
+
 function drawCircle(x, y) {
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -76,7 +114,7 @@ clearEl.addEventListener("click", () => {
 function modalAccept() { /*Old way to do html insert I'll do both but somethings need to be done before hand to check*/
     var canvasData = canvas.toDataURL("image/png");
     console.log(canvasData)
-  /*  var newPost = document.createElement('div')
+    var newPost = document.createElement('div')
     newPost.classList.add('post')
 
     var postContentsDiv = document.createElement('div')
@@ -145,40 +183,19 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
     var dislikeButtons = document.getElementsByClassName("dislike-button")
     console.log(dislikeButtons)
 
+    var dislikeButtons = document.getElementsByClassName("dislike-button")
+    console.log(dislikeButtons)
+    for (var i = 0; i < dislikeButtons.length; i++) {
+        dislikeButtons[i].addEventListener('click', addDislike)
+    }
 
-*/
-
-    var context = {
-  imageSrc: canvasData,
-  imageText: document.getElementById("post-text-input").value,
-  username: document.getElementById("username-input").value,
-  likes: 0,
-  dislikes: 0,
-  date: document.getElementById("post-date-input").value
+    var likeButtons = document.getElementsByClassName("like-button")
+    console.log(likeButtons)
+    for (var i = 0; i < likeButtons.length; i++) {
+        likeButtons[i].addEventListener('click', addLike)
+    }
+    toggleModal()
 }
-var newPost = Handlebars.templates.post(context)
-var postsSection = document.getElementById('posts');
-postsSection.insertAdjacentHTML('beforeend',newPost)
-var dislikeButtons = document.getElementsByClassName("dislike-button")
-console.log(dislikeButtons)
-for (var i = 0; i < dislikeButtons.length; i++) {
-    dislikeButtons[i].addEventListener('click', addDislike)
-}
-
-var likeButtons = document.getElementsByClassName("like-button")
-console.log(likeButtons)
-for (var i = 0; i < likeButtons.length; i++) {
-    likeButtons[i].addEventListener('click', addLike)
-}
-var dislikeButtons = document.getElementsByClassName("dislike-button")
-     console.log(dislikeButtons)
-for (var i = 0; i < dislikeButtons.length; i++){
-     dislikeButtons[i].addEventListener('click', addDislike)
-}
-toggleModal()
-
-}
-
 
 var dislikeButtons = document.getElementsByClassName("dislike-button")
 console.log(dislikeButtons)
@@ -267,7 +284,7 @@ function addDislike(event) {
         num_dislikes += str_num[i];
     }
 
-    // Check to see if any dislikes previously added
+    // Check to see if any dislikes previously added 
     var par = (event.target).parentNode;
 
     var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
@@ -325,7 +342,7 @@ function addLike(event) {
         num_likes += str_num[i];
     }
 
-    // Check to see if any dislikes previously added
+    // Check to see if any dislikes previously added 
     var par = (event.target).parentNode;
 
     var dislike_num = par.getElementsByClassName("dislike_num")[0].innerText;
@@ -377,7 +394,7 @@ function setButtonColor(event) {
     } else if (dislike_num == 0) {
         par.getElementsByClassName("dislike-button")[0].style.color = "lightgray";
     }
-}
+} 
 
 function checkToggleModal() {
     if (confirm("Are you sure you want to discard your work? \nThis cannot be undone.")) {
