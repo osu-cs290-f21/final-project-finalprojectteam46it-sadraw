@@ -146,17 +146,7 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
     console.log(dislikeButtons)
 
 
-    var dislikeButtons = document.getElementsByClassName("dislike-button")
-    console.log(dislikeButtons)
-    for (var i = 0; i < dislikeButtons.length; i++) {
-        dislikeButtons[i].addEventListener('click', addDislike)
-    }
-
-    var likeButtons = document.getElementsByClassName("like-button")
-    console.log(likeButtons)
-    for (var i = 0; i < likeButtons.length; i++) {
-        likeButtons[i].addEventListener('click', addLike)
-    }*/
+*/
 
     var context = {
   imageSrc: canvasData,
@@ -169,6 +159,17 @@ function modalAccept() { /*Old way to do html insert I'll do both but somethings
 var newPost = Handlebars.templates.post(context)
 var postsSection = document.getElementById('posts');
 postsSection.insertAdjacentHTML('beforeend',newPost)
+var dislikeButtons = document.getElementsByClassName("dislike-button")
+console.log(dislikeButtons)
+for (var i = 0; i < dislikeButtons.length; i++) {
+    dislikeButtons[i].addEventListener('click', addDislike)
+}
+
+var likeButtons = document.getElementsByClassName("like-button")
+console.log(likeButtons)
+for (var i = 0; i < likeButtons.length; i++) {
+    likeButtons[i].addEventListener('click', addLike)
+}
 var dislikeButtons = document.getElementsByClassName("dislike-button")
      console.log(dislikeButtons)
 for (var i = 0; i < dislikeButtons.length; i++){
